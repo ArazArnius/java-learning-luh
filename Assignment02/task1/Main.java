@@ -24,9 +24,9 @@ public class Main {
         */
 
         System.out.println(node_a1.str()); // Expected: 1 3 4 5 8
-        System.out.println("Tree B has a node with value of 6? " + (node_a1.contains(6) ? "Yes." : "No")); // Expected no
-        System.out.println("Tree B has a node with value of 1? " + (node_a1.contains(1) ? "Yes." : "No")); // Expected yes
-        System.out.println("Tree B has a node with value of 5? " + (node_a1.contains(5) ? "Yes." : "No") + "\n\n"); // Expected yes
+        System.out.println("Tree B has a node with value of 6? " + (node_a1.contains(6) ? "Yes." : "No.")); // Expected no
+        System.out.println("Tree B has a node with value of 1? " + (node_a1.contains(1) ? "Yes." : "No.")); // Expected yes
+        System.out.println("Tree B has a node with value of 5? " + (node_a1.contains(5) ? "Yes." : "No.") + "\n\n"); // Expected yes
 
         // Test case 2
         Tree node_b1 = new Tree(5);
@@ -50,8 +50,8 @@ public class Main {
         */
         
         System.out.println(node_b1.str()); // Expected: 3 5 7 8 12
-        System.out.println("Tree B has a node with value of 6? " + (node_b1.contains(6) ? "Yes." : "No")); // Expected no
-        System.out.println("Tree B has a node with value of 12? " + (node_b1.contains(12) ? "Yes." : "No")); // Expected yes
-        System.out.println("Tree B has a node with value of 5? " + (node_b1.contains(5) ? "Yes." : "No")); // Expected yes
+        System.out.println("Tree B has a node with value of 6? " + (node_b1.contains(6) ? "Yes." : "No.")); // Expected no
+        System.out.println("Tree B has a node with value of 12? " + (node_b1.contains(12) ? "Yes." : "No.")); // Expected yes
+        System.out.println("Tree B has a node with value of 5? " + (node_b1.contains(5) ? "Yes." : "No.")); // Expected yes
     }
 }

@@ -29,6 +29,7 @@ public class Tree {
             this.right = right;
     }
 
+    // returns a string containing a tree in-order traverse 
     public String str(){
         String in_order = "";
 
@@ -44,6 +45,46 @@ public class Tree {
 
         return in_order;
     }
+
+    // checks whether a value is in the tree and uses binary tree features
+    // is in O(log n)
+    public boolean contains (int value){
+        boolean con = false;
+        if (this.value == value){
+            return true;
+        }
+
+        if (left != null && con == false){
+            con = left.contains(value);
+        }
+
+        if (right != null && con == false){
+            con = right.contains(value);
+        }
+
+        return con;
+    }
+
+    /*
+    // checks whether the node `value` is in the tree
+    // but is O(n) since it doesn't really use the binary tree features
+    public boolean contains (int value){
+        boolean con = false;
+        if (left != null && con == false){
+            con = left.contains(value);
+        }
+
+        if (this.value == value){
+            return true;
+        }
+
+        if (right != null && con == false){
+            con = right.contains(value);
+        }
+
+        return con;
+    }
+    */
 
     public static void main(String[] args){
         Tree node1 = new Tree(5);

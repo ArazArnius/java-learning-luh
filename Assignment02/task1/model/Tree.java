@@ -85,6 +85,43 @@ public class Tree {
     }
     */
 
+    public Tree findPos(int value){
+        if (this.value == value){ to be used in delete
+            return this; 
+        }
+
+        if (this.value > value){
+            if (left == null){
+                return this; // return the node to which value is gonna bind
+            }
+            return left.findPos(value);
+        }
+
+        if (this.value < value){
+            if (right == null){
+                return this;
+            }
+            return right.findPos(value);
+        }
+
+        return this;
+    }
+
+    public void insertValue(int value){
+        if (this.contains(value) == true){
+            System.out.println("A node with value of " + value + " already exists in the tree! ");
+            return;
+        }
+
+        Tree parent = this.findPos(value); // save a pointer to the parent so we don't call the method multiple times
+
+        if (parent.value > value) { // define whether new node is inserted at the right or the left side
+            parent.setLeft(new Tree(value));
+        } else {
+            parent.setRight(new Tree(value));
+        }
+    }
+
     public static void main(String[] args){
         Tree node1 = new Tree(5);
         Tree node2 = new Tree(3);

@@ -23,10 +23,19 @@ public class Main {
         1   4
         */
 
-        System.out.println(node_a1.str()); // Expected: 1 3 4 5 8
+        System.out.println("Tree A:\n" + node_a1.str()); // Expected: 1 3 4 5 8
         System.out.println("Tree B has a node with value of 6? " + (node_a1.contains(6) ? "Yes." : "No.")); // Expected no
         System.out.println("Tree B has a node with value of 1? " + (node_a1.contains(1) ? "Yes." : "No.")); // Expected yes
-        System.out.println("Tree B has a node with value of 5? " + (node_a1.contains(5) ? "Yes." : "No.") + "\n"); // Expected yes
+        System.out.println("Tree B has a node with value of 5? " + (node_a1.contains(5) ? "Yes." : "No.")); // Expected yes
+        node_a1.insertValue(1);
+        System.out.println("1 added: " + node_a1.str()); // Expected: 1 3 4 5 8
+        node_a1.insertValue(2);
+        System.out.println("2 added: " + node_a1.str()); // Expected: 1 2 3 4 5 8
+        node_a1.insertValue(6);
+        System.out.println("6 added: " + node_a1.str()); // Expected: 1 2 3 4 5 6 8
+        node_a1.insertValue(7);
+        System.out.println("7 added: " + node_a1.str()); // Expected: 1 2 3 4 5 6 7 8
+        System.out.println();
 
         // Test case 2
         Tree node_b1 = new Tree(5);
@@ -49,9 +58,15 @@ public class Main {
             7   12
         */
         
-        System.out.println(node_b1.str()); // Expected: 3 5 7 8 12
+        System.out.println("Tree B:\n" + node_b1.str()); // Expected: 3 5 7 8 12
         System.out.println("Tree B has a node with value of 6? " + (node_b1.contains(6) ? "Yes." : "No.")); // Expected no
         System.out.println("Tree B has a node with value of 12? " + (node_b1.contains(12) ? "Yes." : "No.")); // Expected yes
         System.out.println("Tree B has a node with value of 5? " + (node_b1.contains(5) ? "Yes." : "No.")); // Expected yes
+        node_b1.insertValue(3);
+        System.out.println("3 added: " + node_b1.str()); // Expected: 3 5 7 8 12
+        node_b1.insertValue(4);
+        System.out.println("4 added: " + node_b1.str()); // Expected: 3 4 5 7 8 12
+        node_b1.insertValue(15);
+        System.out.println("15 added: " + node_b1.str()); // Expected: 3 4 5 7 8 12 15
     }
 }

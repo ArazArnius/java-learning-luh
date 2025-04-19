@@ -86,7 +86,7 @@ public class Tree {
     */
 
     public Tree findPos(int value){
-        if (this.value == value){ to be used in delete
+        if (this.value == value){ //to be used in delete
             return this; 
         }
 

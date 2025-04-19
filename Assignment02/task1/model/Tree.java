@@ -5,41 +5,41 @@ public class Tree {
     private Tree left;
     private Tree right;
 
-    public Tree(int value){
+    public Tree(int value) {
         this.value = value;
     }
 
-    public int getValue(){ // This looks totally unnecessary
+    public int getValue() { // This looks totally unnecessary
         return value;
     }
 
-    public Tree getLeft(){ // `this.` can not be used in a static method. good to know
+    public Tree getLeft() { // `this.` can not be used in a static method. good to know
         return left; // No need to write this.left cuz there is no variable shadowing being happened
     }
 
-    public Tree getRight(){
+    public Tree getRight() {
         return right;
     }
 
-    public void setLeft(Tree left){
+    public void setLeft(Tree left) {
         this.left = left;
     }
 
-    public void setRight(Tree right){
+    public void setRight(Tree right) {
             this.right = right;
     }
 
     // returns a string containing a tree in-order traverse 
-    public String str(){
+    public String str() {
         String in_order = "";
 
-        if (left != null){
+        if (left != null) {
             in_order += left.str();
         }
 
         in_order += value + " ";
 
-        if (right != null){
+        if (right != null) {
             in_order += right.str();
         }
 
@@ -47,16 +47,16 @@ public class Tree {
     }
 
     // checks whether a value is in the tree and uses binary tree features and is O(log n)
-    public boolean contains (int value){
-        if (this.value == value){ // no need to define bool con = 0
+    public boolean contains(int value) {
+        if (this.value == value) { // no need to define bool con = 0
             return true;
         }
 
-        if (left != null && this.value > value){
+        if (left != null && this.value > value) {
             return left.contains(value);
         }
 
-        if (right != null && this.value < value){
+        if (right != null && this.value < value) {
             return right.contains(value);
         }
 
@@ -66,18 +66,18 @@ public class Tree {
     /*
     // checks whether the node `value` is in the tree
     // but is O(n) since it doesn't really use the binary tree features
-    public boolean contains (int value){
+    public boolean contains(int value) {
         boolean con = false;
 
-        if (left != null && con == false){
+        if (left != null && con == false) {
             con = left.contains(value);
         }
 
-        if (this.value == value){
+        if (this.value == value) {
             return true;
         }
 
-        if (right != null && con == false){
+        if (right != null && con == false) {
             con = right.contains(value);
         }
 
@@ -85,20 +85,20 @@ public class Tree {
     }
     */
 
-    public Tree findPos(int value){
-        if (this.value == value){ // to be used in delete
+    public Tree findPos(int value) {
+        if (this.value == value) { // to be used in delete
             return this; 
         }
 
-        if (this.value > value){
-            if (left == null){
+        if (this.value > value) {
+            if (left == null) {
                 return this; // return the node to which value is gonna bind
             }
             return left.findPos(value);
         }
 
-        if (this.value < value){
-            if (right == null){
+        if (this.value < value) {
+            if (right == null) {
                 return this;
             }
             return right.findPos(value);
@@ -107,8 +107,8 @@ public class Tree {
         return this;
     }
 
-    public void insertValue(int value){
-        if (this.contains(value)){
+    public void insertValue(int value) {
+        if (this.contains(value)) {
             System.out.println("Error at insertion: A node with value of " + value + " already exists in the tree! ");
             return;
         }
@@ -123,8 +123,8 @@ public class Tree {
     }
 
     // honestly I don't know how to implement deletion
-    // public void deleteValue(int value){
-    //     if (!this.contains(value)){
+    // public void deleteValue(int value) {
+    //     if (!this.contains(value)) {
     //         System.out.println("Error at deletion: There is no node with value of " + value + " in the tree! ");
     //         return;
     //     }
@@ -132,7 +132,7 @@ public class Tree {
         
     // }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Tree node1 = new Tree(5);
         Tree node2 = new Tree(3);
         Tree node3 = new Tree(8);

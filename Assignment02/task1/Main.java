@@ -1,7 +1,7 @@
 import model.*;
 
 public class Main {
-    public static void main (String[] args){
+    public static void main(String[] args) {
         // Test case 1:
         Tree node_a1 = new Tree(5);
         Tree node_a2 = new Tree(3);

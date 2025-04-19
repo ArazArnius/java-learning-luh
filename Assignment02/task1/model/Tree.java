@@ -86,7 +86,7 @@ public class Tree {
     */
 
     public Tree findPos(int value){
-        if (this.value == value){ //to be used in delete
+        if (this.value == value){ // to be used in delete
             return this; 
         }
 
@@ -108,8 +108,8 @@ public class Tree {
     }
 
     public void insertValue(int value){
-        if (this.contains(value) == true){
-            System.out.println("A node with value of " + value + " already exists in the tree! ");
+        if (this.contains(value)){
+            System.out.println("Error at insertion: A node with value of " + value + " already exists in the tree! ");
             return;
         }
 
@@ -121,6 +121,16 @@ public class Tree {
             parent.setRight(new Tree(value));
         }
     }
+
+    // honestly I don't know how to implement deletion
+    // public void deleteValue(int value){
+    //     if (!this.contains(value)){
+    //         System.out.println("Error at deletion: There is no node with value of " + value + " in the tree! ");
+    //         return;
+    //     }
+
+        
+    // }
 
     public static void main(String[] args){
         Tree node1 = new Tree(5);

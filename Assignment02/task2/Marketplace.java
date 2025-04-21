@@ -60,19 +60,22 @@ public class Marketplace {
         user1.addItem(new Item("Bicycle", (float)420.00, user1, "Mountain bike, slightly used")); // Error: possible lossy conversion from double to float
         user1.addItem(new Item("Laptop", (float)899.99, user1, "A used laptop in good condition"));
         market_place.addUser(user1);
-        System.out.println("1st test\n" + market_place.str());
+        System.out.println("1st test: first user added\n" + market_place.str());
 
         User user2 = new User("Dr. Matthias Becker", "veryhardpassword");
         user2.addItem(new Item("Headphones", (float)39.95, user2, "Noise-cancelling over-ear headphones"));
         user2.addItem(new Item("Desk Lamp", (float)15.50, user2, "LED lamp with adjustable brightness"));
-        user2.addItem(new Item("Backpack", (float)25.00, user2, "Waterproof and durable, great for school"));
+        Item backpack = new Item("Backpack", (float)25.00, user2, "Waterproof and durable, great for school");
+        user2.addItem();
         market_place.addUser(user2);
-        System.out.println("2nd test\n" + market_place.str());
+        System.out.println("2nd test: user added\n" + market_place.str());
 
         User user3 = new User("Araz Mazaheri", "anotherpassowrd"); // user with same name 
         user3.addItem(new Item("Coffee Maker", (float)35.00, user3, "Brews fast, barely used")); 
         user3.addItem(new Item("Gaming Mouse", (float)29.99, user3, "RGB lights, like new"));
         market_place.addUser(user3); // user will not be added (and their corresponding products)
-        System.out.println("3rd test\n" + market_place.str());
+        System.out.println("3rd test: user with existing username can not be added\n" + market_place.str());
+
+        user.removeItem()
     }
 }

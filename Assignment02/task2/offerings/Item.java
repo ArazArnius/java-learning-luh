@@ -1,4 +1,5 @@
 package offerings;
+import auth.*;
 
 public class Item {
     private String name;

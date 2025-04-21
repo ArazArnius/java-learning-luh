@@ -1,4 +1,5 @@
 package auth;
+import offerings.*;
 
 public class User {
     private String username;
@@ -10,7 +11,7 @@ public class User {
         this.password = password;
     }
 
-    public static String getUsername() { // no need for setter since usernames don't change
+    public String getUsername() { // no need for setter since usernames don't change
         return username;
     }
 

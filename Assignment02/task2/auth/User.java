@@ -9,6 +9,7 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        items = new Item[0];
     }
 
     public String getUsername() { // no need for setter since usernames don't change

@@ -1,12 +1,12 @@
 package offerings;
 
-Public class Item {
+public class Item {
     private String name;
     private float price;
     private User seller;
     private String description;
 
-    public Item(name, price, seller, description) {
+    public Item(String name, float price, User seller, String description) {
         this.name = name;
         this.price = price;
         this.seller = seller;

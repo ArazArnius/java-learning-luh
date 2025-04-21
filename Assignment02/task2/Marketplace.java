@@ -2,11 +2,11 @@ import offerings.*;
 import auth.*;
 
 public class Marketplace {
-    private User[10] users;
+    private User[] users = new User[10];
 
     public boolean addUser(User user) {
         for (int i = 0; i < users.length; i++) {
-            if (if users[i] != null && users[i].getUsername() == user.getUsername()) {
+            if (users[i] != null && users[i].getUsername() == user.getUsername()) {
                 System.out.println("Error at adding user " + user.getUsername + ": user already exists! ");
                 return false;
             }
@@ -38,9 +38,9 @@ public class Marketplace {
 
                 // single item string format
                 String s_item = "[Item: " + users[i].getItems[j].getName() +
-                                "; Price: " users[i].getItems[j].getPrice() + 
-                                "; Seller: " users[i].getItems[j].getSeller().getUsername() +
-                                "; Description: " users[i].getItems[j].getDescription() + 
+                                "; Price: " + users[i].getItems[j].getPrice() + 
+                                "; Seller: " + users[i].getItems[j].getSeller().getUsername() +
+                                "; Description: " + users[i].getItems[j].getDescription() + 
                                 "]\n";
 
                 items_users += s_item;

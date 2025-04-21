@@ -50,10 +50,10 @@ public class User {
             return rmv;
         }
 
-        Item[] new_items = new Item[items.length - 1]
+        Item[] new_items = new Item[items.length - 1];
 
         // actaully remove the item
-        for (int j = 0, int k = 0; j < new_items.length; k++) { //j is index variable for new_items[], k is i.v. for itemp[]
+        for (int j = 0, k = 0; j < new_items.length; k++) { //j is index variable for new_items[], k is i.v. for itemp[]
             if (k == i) { // items[i] shall be removed
                 continue;
             } else {
@@ -83,7 +83,7 @@ public class User {
         }
         
         // add the item
-        Item[] new_items = new Item[items.length + 1]
+        Item[] new_items = new Item[items.length + 1];
         new_items[0] = item;
 
         // copy items[] into new_items[]

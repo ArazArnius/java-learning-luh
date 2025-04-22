@@ -57,16 +57,31 @@ public class Main {
              / \
             7   12
         */
-        
         System.out.println("Tree B:\n" + node_b1.str()); // Expected: 3 5 7 8 12
+        System.out.println("***\nTo verify findNode(value - 1 || value + 1) works (successor of value)\n" +
+                            "findNode(7-1): \nValue: " + node_b1.findNode(7 - 1).getValue() + "\nfindNode(7+1):" + 
+                            "\nValue: " + node_b1.findNode(7 + 1).getValue() + "\n***");
         System.out.println("Tree B has a node with value of 6? " + (node_b1.contains(6) ? "Yes." : "No.")); // Expected no
         System.out.println("Tree B has a node with value of 12? " + (node_b1.contains(12) ? "Yes." : "No.")); // Expected yes
         System.out.println("Tree B has a node with value of 5? " + (node_b1.contains(5) ? "Yes." : "No.")); // Expected yes
+
         node_b1.insertValue(3);
         System.out.println("3 added: " + node_b1.str()); // Expected: 3 5 7 8 12
         node_b1.insertValue(4);
         System.out.println("4 added: " + node_b1.str()); // Expected: 3 4 5 7 8 12
         node_b1.insertValue(15);
         System.out.println("15 added: " + node_b1.str()); // Expected: 3 4 5 7 8 12 15
+
+        node_b1.deleteValue(4); // leaf
+        System.out.println("\n4 deleted: " + node_b1.str()); // Expected: 3 5 7 8 12 15
+        node_b1.deleteValue(3); // 1 child
+        System.out.println("3 deleted: " + node_b1.str()); // Expected: 5 7 8 12 15
+        node_b1.deleteValue(8); // normal 2 children
+        System.out.println("8 deleted: " + node_b1.str()); // Expected: 5 7 12 15
+        node_b1.deleteValue(5); // root: code not working for deleting the root since we are calling str on the root!
+
+        System.out.println("5 deleted: str called from node 5: " + node_b1.str()); // Expected: 7 12 15 
+        // since in the code we change pointers from and to the successor and the delted node, here 7 can not be shown from node_b1 anymore (my assumption)
+        System.out.println("5 deleted: str called from node 7: " + node_b4.str()); // and my assumption is correct
     }
 }

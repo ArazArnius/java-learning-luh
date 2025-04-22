@@ -85,26 +85,39 @@ public class Tree {
     }
     */
 
-    public Tree findPos(int value) {
-        if (this.value == value) { // to be used in delete
-            return this; 
-        }
-
+    // returns the node if it exists, otherwise the parent of where it had been shown.
+    public Tree findNode(int value) {
         if (this.value > value) {
             if (left == null) {
-                return this; // return the node to which value is gonna bind
+                return this; // return the node, to which value is gonna bind
             }
-            return left.findPos(value);
-        }
-
-        if (this.value < value) {
+            return left.findNode(value);
+        } else if (this.value < value) {
             if (right == null) {
                 return this;
             }
-            return right.findPos(value);
+            return right.findNode(value);
+        } else {
+            return this;
+        }
+    }
+
+    // returns the given node's (value's) parent
+    public Tree findParent(int value) {
+        if ((left != null && left.getValue() == value) || 
+            (right != null && right.getValue() == value)) {
+            return this;
+        }
+        
+        if (value < this.value && left != null) {
+            return left.findParent(value);
+        }
+        
+        if (value > this.value && right != null) {
+            return right.findParent(value);
         }
 
-        return this;
+        return null; // value not in the tree or root
     }
 
     public void insertValue(int value) {
@@ -113,7 +126,7 @@ public class Tree {
             return;
         }
 
-        Tree parent = this.findPos(value); // save a pointer to the parent so we don't call the method multiple times
+        Tree parent = this.findNode(value); // save a pointer to the parent so we don't call the method multiple times
 
         if (parent.value > value) { // define whether new node is inserted at the right or the left side
             parent.setLeft(new Tree(value));
@@ -122,15 +135,72 @@ public class Tree {
         }
     }
 
-    // honestly I don't know how to implement deletion
-    // public void deleteValue(int value) {
-    //     if (!this.contains(value)) {
-    //         System.out.println("Error at deletion: There is no node with value of " + value + " in the tree! ");
-    //         return;
-    //     }
+    // honestly I don't know how to implement deletion 
+    // and this is probably the worst implementatin in programming's history
+    public void deleteValue(int value) {
+        if (!this.contains(value)) {
+            System.out.println("Error at deletion: There is no node with value of " + value + " in the tree! ");
+            return;
+        }
 
-        
-    // }
+        Tree parent = this.findParent(value);
+        Tree node = this.findNode(value);
+
+        // case 1: node that is being deleted is a leaf
+        if (parent != null && node.getRight() == null && node.getLeft() == null) {
+            if (parent.getRight() == node) { // to figure whether node is right or left child of parent
+                parent.setRight(null); // node is deleted
+            } else {
+                parent.setLeft(null);
+            }
+        } // case 2: node has one child
+        else if (parent != null && (node.getRight() == null ^ node.getLeft() == null)) { // node has either right or left child
+            if (parent.getRight() == node) {
+                parent.setRight(node.getRight() == null ? node.getLeft() : node.getRight()); // set parent't edge to node's child
+            } else if (parent.getLeft() == node) {
+                parent.setLeft(node.getRight() == null ? node.getLeft() : node.getRight());
+            }
+            return;
+        } // case 3: node has 2 children
+        else {
+            Tree successor = this.findNode(value - 1); // find the previous or after value of in in-order (works only since values are int)
+            if (successor.value == value) {
+                successor = this.findNode(value + 1);
+            }
+            System.out.println("successor: " + successor.getValue());
+            Tree s_parent = this.findParent(successor.getValue());
+            
+            if (parent == null) { // case 4: node is root of the tree
+                parent = node;
+            } else if (parent.getRight() == node) {
+                parent.setRight(successor); // set parent's corresponding edge to point to successor
+            } else if (parent.getLeft() == node) {
+                parent.setLeft(successor);
+            }
+
+            // remove pointers to the successor by its parent (technically deleting it like a node but since we have no setValue we need to change pointers for it to work)
+            if (s_parent.getRight() == successor) { // to figure whether node is right or left child of parent
+                s_parent.setRight(null);
+                // the successor can have max one child (if left smaller inorder, then left child) and vise versa
+                if (successor.getRight() != null) { 
+                    s_parent.setRight(successor.getRight());
+                } else if (successor.getLeft() != null) {
+                    s_parent.setRight(successor.getLeft());
+                }
+            } else {
+                s_parent.setLeft(null);
+                if (successor.getRight() != null) { 
+                    s_parent.setLeft(successor.getRight());
+                } else if (successor.getLeft() != null) {
+                    s_parent.setRight(successor.getLeft());
+                }
+            }
+
+            successor.setLeft(node.getLeft());
+            successor.setRight(node.getRight());
+        }
+        return;
+    }
 
     public static void main(String[] args) {
         Tree node1 = new Tree(5);

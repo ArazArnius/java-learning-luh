@@ -10,7 +10,7 @@ public class NPC {
     /** indicates whether the NPC is crouching or standing */
     private boolean is_crouching;
 
-    public NPC(x_coordinate, is_crouching) {
+    public NPC(int x_coordinate, boolean is_crouching) {
         this.x_coordinate = x_coordinate;
         this.is_crouching = is_crouching;
     }
@@ -24,7 +24,7 @@ public class NPC {
      * 
      * @param x_coordinate
      */
-    public void setXCoordinate(x_coordinate) {
+    public void setXCoordinate(int x_coordinate) {
         this.x_coordinate = x_coordinate;
     }
 
@@ -33,7 +33,7 @@ public class NPC {
      * 
      * @return is_crouching
      */
-    public int getIsCrouch() {
+    public boolean getIsCrouching() {
         return is_crouching;
     }
 
@@ -59,7 +59,7 @@ public class NPC {
      * if the character is crouching then nothing happens when this method is called
      */
     public void dashRight() {
-        if (getIsCrouch) {
+        if (getIsCrouch()) {
             return;
         }
 

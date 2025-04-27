@@ -4,9 +4,9 @@ package model;
  * represents different types of game objects that can appear in the game.
  * each game object has a unique character symbol associated with it for display.
  */
-public enum GameObject = {
+public enum GameObject {
     /** represents the ground in the game */
-    GROUND('G')
+    GROUND('G'),
     /** represents lava in the game */
     LAVA('L'),
     /** represents obstacles in the air in the game */

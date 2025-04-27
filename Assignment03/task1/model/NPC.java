@@ -28,8 +28,8 @@ public class NPC {
         this.x_coordinate = x_coordinate;
     }
 
-    /** getter method for {@link model.NPC#is_crouch} attribute
-     * {@link model.NPC#is_crouch} indicates whether the NPC is crouching or standing
+    /** getter method for {@link model.NPC#is_crouching} attribute
+     * {@link model.NPC#is_crouching} indicates whether the NPC is crouching or standing
      * 
      * @return is_crouching
      */
@@ -37,12 +37,12 @@ public class NPC {
         return is_crouching;
     }
 
-    /** alter method for {@link model.NPC#is_crouch} attribute to make NPC stand */
+    /** alter method for {@link model.NPC#is_crouching} attribute to make NPC stand */
     public void stand() {
         is_crouching = false;
     }
 
-    /** alter method for {@link model.NPC#is_crouch} attribute to make NPC crouch */
+    /** alter method for {@link model.NPC#is_crouching} attribute to make NPC crouch */
     public void crouch() {
         is_crouching = true;
     }
@@ -59,7 +59,7 @@ public class NPC {
      * if the character is crouching then nothing happens when this method is called
      */
     public void dashRight() {
-        if (getIsCrouch()) {
+        if (is_crouching) {
             return;
         }
 

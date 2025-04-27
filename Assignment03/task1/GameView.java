@@ -34,7 +34,7 @@ public class GameView {
             }
             
             // initializes the second row
-            world[2][i] = GameObject.EMPTY;
+            world[1][i] = GameObject.EMPTY;
         }
 
         // initialize the third row
@@ -55,7 +55,7 @@ public class GameView {
      * @param text is the 2D char array that's gonna be converted
      * @return result
      */
-    public static String 2DCharToString(char[][] text) {
+    public static String twoDCharToString(char[][] text) {
         String result = "";
 
         for (char[] row : text) {
@@ -69,16 +69,16 @@ public class GameView {
     }
 
     /** this method returns the printable value to show the game-world
-     * first builds a 2D char array from the GameObject[][] world and then converts it to string using 2DCharToString method
+     * first builds a 2D char array from the GameObject[][] world and then converts it to string using twoDCharToString method
      * 
-     * @return 2DCharToString(game) 
+     * @return twoDCharToString(game) 
      */
     public String str() {
         char[][] game = new char[world.length][world[0].length];
 
         for (int i = 0; i < world.length; i++) {
             for (int j = 0; j < world[i].length; j++) {
-                char[i][j] = world[i][j].getSymbol();
+                game[i][j] = world[i][j].getSymbol();
             }
         }
 
@@ -89,33 +89,36 @@ public class GameView {
             game[0][player.getXCoordinate()] = 'P';
         }
 
-        return 2DCharToString(game);
+        return twoDCharToString(game);
     }
 
     /** this method contains the game rules */
     public void play() {
         while (true) {
-            print(this.str());
+            System.out.println(this.str());
             
             // if player is on lava or has reached the target, the game finishes
             if (world[2][player.getXCoordinate()] == GameObject.LAVA ||
                 world[2][player.getXCoordinate()] == GameObject.TARGET) {
                 System.out.println("\nGame has ended!");
+                break;
             }
 
             // if there's an airobstacle in front of the player, they should crouch
             if (world[0][player.getXCoordinate() + 1] == GameObject.AIROBSTACLE) {
                 player.crouch();
+            } else if (world[0][player.getXCoordinate()] == GameObject.AIROBSTACLE) {
+                player.stand();
             }
 
             // if there's lava in front of the player, they should dash
-            if (world[0][player.getXCoordinate() + 1] == GameObject.LAVA) {
-                if (player.getIsCrouching) {
+            if (world[2][player.getXCoordinate() + 1] == GameObject.LAVA) {
+                if (player.getIsCrouching()) {
                     player.stand();
                 }
                 player.dashRight();
             } else { // if there's no lava then walk normally
-                player.walkRight()
+                player.walkRight();
             }
         }
     }

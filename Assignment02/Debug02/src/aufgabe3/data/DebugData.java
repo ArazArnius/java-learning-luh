@@ -17,11 +17,11 @@ public class DebugData { // class not defined public
     }
     
     public double getX(){
-        return this.x;
+        return x;
     }
     
     public double getY(){
-        return this.x;
+        return y;
     }
     
     public void setX(double x){

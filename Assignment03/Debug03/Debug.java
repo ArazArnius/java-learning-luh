@@ -1,5 +1,8 @@
 enum Operator {
-  ADD, SUBTRACT, MULTIPLY, DIVIDE
+  ADD, 
+  SUBTRACT, 
+  MULTIPLY, 
+  DIVIDE
 }
 
 //Should not be instanciated with right_==0 and op_==DIVIDE
@@ -14,15 +17,20 @@ class Expression {
   }
 
   double evaluate() {
-    switch (this.op_) {
-      case Operator.ADD:
-        return this.left_ + this.right_;
-      case Operator.SUBTRACT:
-        return this.left_ - this.right_;
-      case Operator.MULTIPLY:
-        return this.left_ * this.right_;
-      case Operator.DIVIDE:
-        return this.left_ / this.right_;
+    switch (op_) { // no need to write this.op
+      case ADD: // Operator removed (it wouldn't be workin in java 17)
+        return left_ + right_;
+      case SUBTRACT:
+        return left_ - right_;
+      case MULTIPLY:
+        return left_ * right_;
+      case DIVIDE: {
+        if (right_ == 0) {
+          System.out.println("Error: Division by zero");
+          return Double.NaN;
+        }
+        return left_ / right_;
+      }
       default:
         return 0.0;
     }
@@ -32,7 +40,7 @@ class Expression {
 class Debug {
 
   public static void main(String[] args) {
-    Operator[] ops = new Operator[5];
+    Operator[] ops = new Operator[4]; // null pointer because it was with length 5
     ops[0] = Operator.DIVIDE;
     ops[1] = Operator.SUBTRACT;
     ops[2] = Operator.MULTIPLY;
@@ -48,3 +56,9 @@ class Debug {
     }
   }
 }
+/*
+Exception in thread "main" java.lang.NullPointerException: Cannot invoke "Operator.ordinal()" because "this.op_" is null
+        at Expression.evaluate(Debug.java:20)
+        at Debug.main(Debug.java:50)
+
+*/

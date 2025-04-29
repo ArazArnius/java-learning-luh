@@ -1,4 +1,4 @@
-package model;
+package task1.model;
 
 /**
  * represents the NPC (non playable character) that is gonna be moving in the game.

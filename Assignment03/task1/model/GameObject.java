@@ -1,4 +1,4 @@
-package model;
+package task1.model;
 
 /**
  * represents different types of game objects that can appear in the game.

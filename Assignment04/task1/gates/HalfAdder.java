@@ -1,10 +1,9 @@
 package task1.gates;
 
 public class HalfAdder {
-    private Gate[] rsrc;
+    private Gate[] rsrc = new Gate[2]; // why must I initialize it here?
 
     public HalfAdder(){
-        rsrc = new Gate[2];
         rsrc[0] = new XorGate();
         rsrc[1] = new AndGate();
     }
@@ -19,7 +18,7 @@ public class HalfAdder {
         return result;
     }
 
-    void info() {
+    public void info() {
         for (Gate i : rsrc) {
             i.table();
         }

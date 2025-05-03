@@ -8,18 +8,22 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        //Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         System.out.printf("Enter the first boolean value: (true/false) ");
-        boolean a = true; // sc.nextBoolean();
+        boolean a = sc.nextBoolean();
 
         System.out.printf("Enter the second boolean value: (true/false) ");
-        boolean b = true; // sc.nextBoolean();
+        boolean b = sc.nextBoolean();
 
         HalfAdder half_adder = new HalfAdder();
         boolean[] result = half_adder.add(a, b);
 
         System.out.printf("\nThe sum is %d, the carry is %d.\n", boolToInt(result[0]), boolToInt(result[1]));
-        //sc.close();
+        
+        System.out.printf("\nHalf adder info:\n");
+        half_adder.info();
+
+        sc.close();
     }
 }

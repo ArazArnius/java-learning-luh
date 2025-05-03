@@ -7,9 +7,10 @@ public class XorGate extends Gate {
 
     public XorGate() {
         super("XOR");
-        and = new AndGate();
-        or = new OrGate();
-        not = new NotGate();
+        this.and = new AndGate();
+        this.or = new OrGate();
+        this.not = new NotGate();
+        // System.out.println("\n\nXorGate initialized: not = " + not);
     }
 
     @Override

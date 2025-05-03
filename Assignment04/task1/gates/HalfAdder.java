@@ -1,9 +1,11 @@
 package task1.gates;
 
 public class HalfAdder {
-    private Gate[] rsrc = new Gate[2]; // why must I initialize it here?
+    private Gate[] rsrc; // why must I initialize it here? 
+    // I shouldn't! the problem was with class files so it wasn't getting compiled again
 
     public HalfAdder(){
+        rsrc = new Gate[2];
         rsrc[0] = new XorGate();
         rsrc[1] = new AndGate();
     }

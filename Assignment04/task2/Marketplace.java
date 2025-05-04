@@ -81,7 +81,7 @@ public class Marketplace {
      * @return a string of all items that belong to the given category
      */
     public String filterMarket(Category category) {
-        String filtered_items = ; // all users' items
+        String filtered_items = ""; // all users' items
 
         for (int i = 0; i < users.length; i++) {
             // check if users[i] exists
@@ -111,9 +111,7 @@ public class Marketplace {
         return filtered_items;
     }
 
-    public User login() {
-        Scanner sc = new Scanner(System.in);
-
+    public User login(Scanner sc) {
         for(int i = 0; i < 3; i++) { // user can enter a valid username up to three times
             System.out.printf("Enter username: ");
             String username = sc.nextLine();
@@ -127,37 +125,124 @@ public class Marketplace {
                             System.out.println("Login successful.");
                             return u;
                         }
-                        System.out.printf("Error: Wrong password. %d tries left!\n", j);
+                        System.out.printf("Error: Wrong password. %d tries left!\n", 2 - j);
                     }
 
                     System.out.println("Error: Too many attempts. Please try again later.");
+                    sc.close();
                     System.exit(0);
                 }
             }
-            System.out.printf("Error: User doesn't exist. %d tries left!\n", i);
+            System.out.printf("Error: User doesn't exist. %d tries left!\n", 2 - i);
         }
         System.out.println("Error: Unexpected error occured!");
+        return null;
     }
 
-    public void cli(User user) { // getting user as parameter to avoid asking for login on each command
-        Scanner sc = new Scanner(System.in);
+    public void cli(Scanner sc, User user) { // getting user as parameter to avoid asking for login on each command
+        System.out.println("Choose one of the following options: \n\t1. Add item\n\t2. Remove item" +
+                            "\n\t3. View marketplace\n\t4. Edit item\n\t5. Exit program");
         int key = sc.nextInt();
+        sc.nextLine();
+        System.out.println();
 
         switch (key) {
             case 1: { // add an item, name, price, seller, category, description
-                addItem(user);
+                addItem(sc, user);
                 break;
             }
             case 2: { // remove an item
-
+                removeItem(sc, user);
+                break;
             }
+            case 3: { // view marketplace
+                viewMarketplace(sc);
                 break;
-            case 3: // view marketplace
+            }
+            case 4: { // edit an item
+                editItem(sc, user);
                 break;
-            case 4: // edit an item
-                break;
-            default: // exit program
+            }
+            default: { // exit program
+                sc.close();
                 System.exit(0);
+            }
+        }
+    }
+
+    public void editItem(Scanner sc, User user) {
+        System.out.println("List of the items is as shown below: \n" + str());
+        System.out.printf("Which item would you like to edit (for example 2)? ");
+
+        int edit_index = sc.nextInt() - 1; // becuase the indexes are shown as index + 1
+        sc.nextLine();
+        System.out.println();
+        Item edit_item = findItem(edit_index);
+
+        if (!edit_item.getSeller().getUsername().equals(user.getUsername())) { // if it's another user trying to edit an item
+            System.out.println("You do not have the permission to modify this item!");
+            return;
+        }
+
+        System.out.println("What would you like to edit:\n\t1. Name" + 
+                            "\n\t2. Price\n\t3. Description");
+        int choice = sc.nextInt();
+        sc.nextLine();
+        System.out.println();
+
+        switch (choice) {
+            case 1: {
+                System.out.printf("Changing name of the product\nWhat is the new name? (for example: Backpack) ");
+                String name = sc.nextLine();
+                edit_item.setName(name);
+                break;
+            }
+            case 2: {
+                System.out.printf("Changing price of the product\nWhat is the new price? (for example: 23.00) ");
+                float price = sc.nextFloat();
+                sc.nextLine();
+                edit_item.setPrice(price);
+                break;
+            }
+            case 3: {
+                System.out.printf("Changing description of the product\n" + 
+                                    "What is the new description? (for example: Red school bag) ");
+                String description = sc.nextLine();
+                edit_item.setDescription(description);
+                System.out.println("description is actually changed!");
+                break;
+            }
+            default: {
+                System.out.println("Error: invalid entry. Please try again!");
+            }
+        }
+        System.out.println("Item is edited successfully!\n");
+    }
+
+    public void viewMarketplace(Scanner sc) {
+        System.out.println("Which category would you like to view:\n\t1. All" + 
+                            "\n\t2. Furniture\n\t3. Electronics\n\t4. Other");
+        int choice = sc.nextInt();
+        sc.nextLine();
+        System.out.println();
+
+        switch (choice) {
+            case 1: {
+                System.out.println(str());
+                break;
+            }
+            case 2: {
+                System.out.println(filterMarket(Category.FURNITURE));
+                break;
+            }
+            case 3: {
+                System.out.println(filterMarket(Category.ELECTRONICS));
+                break;
+            }
+            case 4: {
+                System.out.println(filterMarket(Category.OTHER));
+                break;
+            }
         }
     }
 
@@ -166,19 +251,35 @@ public class Marketplace {
      * 
      * @param user the user to whome the item will be assigned
      */
-    public void removeItem(User user) {
-        Scanner sc = new Scanner(System.in);
-
+    public void removeItem(Scanner sc, User user) {
         System.out.println("List of the items is as shown below: \n" + str());
-        System.out.printf("Which item would you like to remove (for example 3)? ");
+        System.out.printf("Which item would you like to remove (for example 2)? ");
 
-        int to_remove = sc.nextInt() - 1; // becuase the indexes are shown as index + 1
+        int rmv_index = sc.nextInt() - 1; // becuase the indexes are shown as index + 1
+        sc.nextLine();
+        System.out.println();
+        Item rmv_item = findItem(rmv_index);
 
+        System.out.println("Are you sure you want to remove this item? (y/n)\n" + rmv_item);
+        String confirm = sc.nextLine().toLowerCase();
 
+        if (!rmv_item.getSeller().getUsername().equals(user.getUsername())) { // if it's another user trying to delete an item
+            System.out.println("You do not have the permission to delete this item!\n");
+            return;
+        }
+
+        if (!confirm.equals("y")) {
+            System.out.println("Then kindly try again!\n");
+            return;
+        }
+
+        user.removeItem(rmv_item);
+        System.out.println("Item is removed successfully!\n");
     }
 
     /**
      * finds an item based on the index in which the program discovers items
+     * know that index starts at 0 and not like natural numbers
      * 
      * @param index the index in which the item is at
      * @return item is the item in that index
@@ -201,7 +302,7 @@ public class Marketplace {
             }
         }
 
-        System.out.println("Error: couldn't find an item at the given index.")
+        System.out.println("Error: couldn't find an item at the given index.");
         return null;
     }
 
@@ -210,18 +311,19 @@ public class Marketplace {
      * 
      * @param user the user to whome the item will be assigned
      */
-    public void addItem(User user) {
-        System.out.printf("Adding Item:\nPlease enter the name of the product: ");
+    public void addItem(Scanner sc, User user) {
+        System.out.printf("Adding Item!\nPlease enter the name of the product: ");
         String name = sc.nextLine();
         System.out.printf("Please enter the price of the product (for example: 3.50): ");
-        float price = sc.nextFloat();
+        float price = sc.nextFloat(); // apparently I have to add nextLine() here to consume the \n
+        sc.nextLine();
         System.out.printf("Please enter the category of the product (for example: Furniture): ");
-        String category = sc.nextLine();
+        String category = sc.nextLine().toLowerCase();
         System.out.printf("Please enter the description of the product: ");
         String description = sc.nextLine();
 
-        user.addItem(new Item(name, price, stringToCategory(category), user, description));
-        System.out.println("Item added successfully.");
+        user.addItem(new Item(name, price, user, stringToCategory(category), description));
+        System.out.println("Item added successfully!\n");
     }
 
     /**
@@ -231,9 +333,9 @@ public class Marketplace {
      * @return the matching Category enum, or null if no match
      */
     public static Category stringToCategory(String category) { 
-        if (category.equals(Category.FURNITURE.str())) return Category.FURNITURE;         
-        if (category.equals(Category.ELECTRONICS.str())) return Category.ELECTRONICS;
-        if (category.equals(Category.OTHER.str())) return Category.OTHER;
+        if (category.equals("furniture")) return Category.FURNITURE;         
+        if (category.equals("electronics")) return Category.ELECTRONICS;
+        if (category.equals("other")) return Category.OTHER;
         return null;
     }
 
@@ -243,6 +345,7 @@ public class Marketplace {
      * also shows category filtering
      */
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         Marketplace market_place = new Marketplace();
 
         User user1 = new User("Araz Mazaheri", "password");
@@ -269,5 +372,12 @@ public class Marketplace {
         System.out.println("4th test: item sofa removed.\n" + market_place.str());
 
         System.out.println("5th test: apply category filter: Electronics.\n" + market_place.filterMarket(Category.ELECTRONICS));
+
+        // running the CLI here
+        User test_user = market_place.login(sc);
+        while (true){
+            market_place.cli(sc, user1);
+        }
+        // sc.close();
     }
 }

@@ -124,17 +124,17 @@ public class Item {
      * 
      * @param description the new description of the item
      */
-    public void setDescription(String Description) {
+    public void setDescription(String description) { // description was written as Description:)))
         this.description = description;
     }
 
     @Override
     public String toString() {
-        String result = "[Item: " + Name +
-                            "; Price: " + Price + 
-                            "; Seller: " + Seller.getUsername() +
-                            "; Category: " + Category.str() +
-                            "; Description: " + Description;
+        String result = "[Item: " + name +
+                            "; Price: " + price + 
+                            "; Seller: " + seller.getUsername() +
+                            "; Category: " +category.str() +
+                            "; Description: " + description + "]";
         return result;
     }
 }

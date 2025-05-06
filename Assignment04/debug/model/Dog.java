@@ -1,4 +1,5 @@
 package debug.model;
+import debug.Animal; // was not imported
 
 public class Dog extends Animal{
     
@@ -7,10 +8,10 @@ public class Dog extends Animal{
   }
 
 
-  @Override
-  public String getName() {
-    return super.name_;
-  }
+  // @Override
+  // public String getName() {
+  //   return super.getName(); // added getName() instead of trying to access the field directly
+  // }
 
   @Override
   public int getArms() {

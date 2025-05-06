@@ -13,3 +13,20 @@ public class Debug {
     }
   }
 }
+
+/*
+.\debug\model\Dog.java:3: error: cannot find symbol
+public class Dog extends Animal{
+                         ^
+  symbol: class Animal
+
+.\debug\model\Dog.java:7: error: constructor Animal in class Animal cannot be applied to given types;
+    super(name);
+    ^
+  required: String
+  found:    String
+  reason: Animal(String) is not public in Animal; cannot be accessed from outside package
+
+.\debug\model\Dog.java:13: error: name_ has private access in Animal
+    return super.name_;
+*/

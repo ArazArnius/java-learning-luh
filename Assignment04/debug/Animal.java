@@ -6,13 +6,13 @@ public class Animal {
   private int arms_;
 
 
-  Animal(String name, int legs, int arms) {
+  protected Animal(String name, int legs, int arms) {
     this.name_ = name;
     this.legs_ = legs;
     this.arms_ = arms;
   }
 
-  Animal(String name) {
+  protected Animal(String name) { // default access modifier: class itself and classes in same package (not subclasses)
     this(name, 0, 0);
   }
 

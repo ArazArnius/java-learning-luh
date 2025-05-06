@@ -7,11 +7,11 @@ public class Monkey extends Animal {
     super(name);
   }
 
-
-  @Override
-  public String getName() {
-    return super.name_;
-  }
+  // basically we don't need these???
+  // @Override
+  // public String getName() {
+  //   return super.getName(); // added getName() instead of trying to access the field directly
+  // }
 
   @Override
   public int getArms() {

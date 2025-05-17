@@ -31,7 +31,8 @@ Write a program that:
 
 The shift should:
 
-* Apply only to **lowercase letters** (`a`–`z`),
+* Lower case letters stay lower case (`a`–`z`),
+* Upper case letters stay upper case (`A`-`Z`),
 * Wrap around at the end of the alphabet.
 
 **Example:**

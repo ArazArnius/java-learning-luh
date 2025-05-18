@@ -34,8 +34,8 @@ public class PiratesIsland implements State {
     @Override
     public String info() {
         return str() + 
-            "\nAction A → " + transition(Action.A).str() +
-            "; Action B → " + transition(Action.B).str();
+            "\nAction A -> " + transition(Action.A).str() +
+            "; Action B -> " + transition(Action.B).str();
     }
 
     /**

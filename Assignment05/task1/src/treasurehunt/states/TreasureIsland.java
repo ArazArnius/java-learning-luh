@@ -2,9 +2,9 @@ package treasurehunt.states;
 import treasurehunt.actions.Action;
 
 /**
- * Represents the state Dead Man's Island in the automaton.
+ * Represents the state Treasure Island in the automaton.
  */
-public class DeadMansIsland implements State {
+public class TreasureIsland implements State {
     /**
      * Performs the state transition based on the current state and the given action.
      *
@@ -13,7 +13,8 @@ public class DeadMansIsland implements State {
      */
     @Override
     public State transition(Action action) {
-        return action == Action.A ? new MusketHill() : new ShipwreckBay();
+        // no actions can be done in Treasure Island
+        return this;
     }
 
     /**
@@ -23,7 +24,7 @@ public class DeadMansIsland implements State {
      */
     @Override
     public String str() {
-        return "Dead Man's Island";
+        return "Treasure Island";
     }
 
     /**
@@ -39,10 +40,10 @@ public class DeadMansIsland implements State {
     }
 
     /**
-     * Test method for DeadMansIsland state.
+     * Test method for TreasureIsland state.
      */
     public static void main(String[] args) {
-        DeadMansIsland obj = new DeadMansIsland();
+        TreasureIsland obj = new TreasureIsland();
         System.out.println("Current state: " + obj.str());
         System.out.println("If action A: " + obj.transition(Action.A).str());
         System.out.println("If action B: " + obj.transition(Action.B).str());

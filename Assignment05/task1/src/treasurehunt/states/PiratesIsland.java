@@ -1,5 +1,5 @@
 package treasurehunt.states;
-import actions.Action;
+import treasurehunt.actions.Action;
 
 /**
  * Represents the state Pirates' Island in the automaton.

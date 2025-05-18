@@ -1,4 +1,4 @@
-package actions;
+package treasurehunt.actions;
 
 public enum Action {
     A('A'),

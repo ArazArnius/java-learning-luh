@@ -2,9 +2,9 @@ package treasurehunt.states;
 import actions.Action;
 
 /**
- * Represents the state Musket Hill in the automaton.
+ * Represents the state Pirates' Island in the automaton.
  */
-public class MusketHill implements State {
+public class PiratesIsland implements State {
     /**
      * Performs the state transition based on the current state and the given action.
      *
@@ -13,7 +13,7 @@ public class MusketHill implements State {
      */
     @Override
     public State transition(Action action) {
-        return action == Action.A ? new PiratesIsland() : new MutineersIsland();
+        return action == Action.A ? new ShipwreckBay() : new MusketHill();
     }
 
     /**
@@ -23,7 +23,7 @@ public class MusketHill implements State {
      */
     @Override
     public String str() {
-        return "Musket Hill";
+        return "Pirates' Island";
     }
 
     /**
@@ -34,15 +34,15 @@ public class MusketHill implements State {
     @Override
     public String info() {
         return str() + 
-            "\nAction A → " + transition(Action.A).str() + // would not work until destination states are implemented
+            "\nAction A → " + transition(Action.A).str() +
             "; Action B → " + transition(Action.B).str();
     }
 
     /**
-     * Test method for MusketHill state.
+     * Test method for PiratesIsland state.
      */
     public static void main(String[] args) {
-        MusketHill obj = new MusketHill();
+        PiratesIsland obj = new PiratesIsland();
         System.out.println("Current state: " + obj.str());
         System.out.println("If action A: " + obj.transition(Action.A).str());
         System.out.println("If action B: " + obj.transition(Action.B).str());

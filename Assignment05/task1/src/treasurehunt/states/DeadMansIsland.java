@@ -13,7 +13,7 @@ public class DeadMansIsland implements State {
      */
     @Override
     public State transition(Action action) {
-        return action == Action.A ? new SmugglersCove() : new DeadMansIsland();
+        return action == Action.A ? new MusketHill() : new ShipwreckBay();
     }
 
     /**

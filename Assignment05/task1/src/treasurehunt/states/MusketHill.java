@@ -23,9 +23,7 @@ public class MusketHill implements State {
      */
     @Override
     public String str() {
-        String class_name = this.getClass().getName(); // treasurehunt.states.MusketHill
-        String[] names = class_name.split("\\.");
-        return names[names.length() - 1]; // return the last item
+        return "Musket Hill";
     }
 
     /**

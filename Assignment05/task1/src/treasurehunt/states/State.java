@@ -1,4 +1,4 @@
-package states;
+package treasurehunt.states;
 import actions.Action;
 
 /**

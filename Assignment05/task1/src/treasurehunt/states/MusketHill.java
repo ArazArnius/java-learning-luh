@@ -33,8 +33,7 @@ public class MusketHill implements State {
      */
     @Override
     public String info() {
-        return str() + 
-            "\nAction A -> " + transition(Action.A).str() + // would not work until destination states are implemented
+        return "Action A -> " + transition(Action.A).str() + // would not work until destination states are implemented
             "; Action B -> " + transition(Action.B).str();
     }
 
